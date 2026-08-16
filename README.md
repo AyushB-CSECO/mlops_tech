@@ -1,5 +1,5 @@
 # mlops_tech
 
-# Install SQLite3 on Linux
-# sudo apt update
-# sudo apt install sqlite3
+
+Tasks - 
+1) TodoApp - Code the Todo app again to better understand user management and authentication.
