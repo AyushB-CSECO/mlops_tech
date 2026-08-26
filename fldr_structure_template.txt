@@ -1,0 +1,96 @@
+ml_project/
+│
+├── data/
+│   ├── raw/
+│   │   ├── customers.csv
+│   │   ├── orders.csv
+│   │   ├── products.csv
+│   │   ├── payments.csv
+│   │   └── ...
+│   │
+│   ├── processed/
+│   │   └── ...
+│   │
+│   └── external/
+│
+├── database/
+│   ├── app.db
+│   └── migrations/
+│
+├── src/
+│   ├── __init__.py
+│   │
+│   ├── config/
+│   │   ├── __init__.py
+│   │   └── settings.py
+│   │
+│   ├── database/
+│   │   ├── __init__.py
+│   │   ├── connection.py
+│   │   ├── models.py
+│   │   └── repositories/
+│   │       └── ...
+│   │
+│   ├── data/
+│   │   ├── __init__.py
+│   │   ├── ingestion.py
+│   │   ├── validation.py
+│   │   └── preprocessing.py
+│   │
+│   ├── features/
+│   │   ├── __init__.py
+│   │   └── feature_engineering.py
+│   │
+│   ├── ml/
+│   │   ├── __init__.py
+│   │   ├── train.py
+│   │   ├── predict.py
+│   │   ├── evaluate.py
+│   │   └── model.py
+│   │
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   ├── routes/
+│   │   │   ├── health.py
+│   │   │   └── prediction.py
+│   │   └── schemas/
+│   │       └── prediction.py
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       └── logging.py
+│
+├── frontend/
+│   ├── app.py
+│   ├── pages/
+│   │   └── ...
+│   └── components/
+│       └── ...
+│
+├── models/
+│   ├── model.pkl
+│   └── ...
+│
+├── notebooks/
+│   ├── 01_exploration.ipynb
+│   ├── 02_data_analysis.ipynb
+│   └── 03_model_experiments.ipynb
+│
+├── tests/
+│   ├── test_database.py
+│   ├── test_data.py
+│   ├── test_ml.py
+│   └── test_api.py
+│
+├── scripts/
+│   ├── load_data.py
+│   ├── train_model.py
+│   └── ...
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── requirements.txt
+├── README.md
+└── Dockerfile
