@@ -19,6 +19,11 @@ def check_empty_rows(df: pd.DataFrame) -> pd.DataFrame:
         print("No null rows in dataset")
     return df[~empty_row_flag].reset_index(drop=True)
 
+def colnames_lowercase(df: pd.DataFrame):
+    colnames = [i.lower() for i in df.columns]
+    df.columns = colnames
+    return df
+
 if __name__ == "__main__":
     print(BASE_PATH)
 
