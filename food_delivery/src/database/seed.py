@@ -3,7 +3,7 @@ import os, sys
 from pathlib import Path
 
 from database import SessionLocal, create_tables
-from models import Country
+from models import Country, City
 
 # Reset to Base Folder
 FILE_PATH = Path(__file__).resolve()
@@ -15,14 +15,23 @@ os.chdir(BASE_PATH)
 
 from src.data.validation import colnames_lowercase
 
-f_path = BASE_PATH / "data" / "raw" / "countries.csv"
 
-def load_country():
+def get_records(fname: str) -> list:
+    f_path = BASE_PATH / "data" / "raw" / fname
     df = pd.read_csv(f_path)
     df = colnames_lowercase(df)
     records = df.to_dict(orient="records")
+    return records
 
+
+def load_country():
+    records = get_records('countries.csv')
     return [Country(**record) for record in records]
+
+def load_city(): 
+    records = get_records('cities.csv')
+    return [City(**record) for record in records]
+
 
 def seed_database():
     # Create model tables in DB
@@ -34,8 +43,12 @@ def seed_database():
     try:
         country_records = load_country()
         db.add_all(country_records)
-
         db.commit()
+
+        city_records = load_city()
+        db.add_all(city_records)
+        db.commit()
+
     except Exception:
         db.rollback()
         raise
