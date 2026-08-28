@@ -99,10 +99,10 @@ class Restaurant(Base):
 class Menu(Base):
     __tablename__ = "menu"
 
-    menu_id: Mapped[str] = mapped_column(String, primary_key=True)
+    menu_id: Mapped[str] = mapped_column(String)
     restaurant_id: Mapped[str] = mapped_column(String, ForeignKey("restaurant.restaurant_id"))
     food_category: Mapped[str | None] = mapped_column(String)
-    item_name: Mapped[str] = mapped_column(String, unique=True)
+    item_name: Mapped[str] = mapped_column(String)
     price: Mapped[float | None] = mapped_column(Float)
     currency: Mapped[str] = mapped_column(String, ForeignKey("country.currency"))
     calories: Mapped[int | None] = mapped_column(Integer)
@@ -116,14 +116,14 @@ class Menu(Base):
     gluten_free: Mapped[bool | None] = mapped_column(Boolean)
 
     __table_args__ = (
-        PrimaryKeyConstraint('menu_id', 'item_name')
+        PrimaryKeyConstraint('menu_id', 'item_name'),
     )
 
 class Nutrition(Base):
     __tablename__ = "nutrition"
 
-    menu_id: Mapped[str] = mapped_column(String, primary_key=True)
-    item_name: Mapped[str] = mapped_column(String, unique=True)
+    menu_id: Mapped[str] = mapped_column(String)
+    item_name: Mapped[str] = mapped_column(String)
     calories: Mapped[int | None] = mapped_column(Integer)
     protein: Mapped[float | None] = mapped_column(Float)
     fat: Mapped[float | None] = mapped_column(Float) 
@@ -147,7 +147,7 @@ class Price_History(Base):
 
     menu_id: Mapped[str] = mapped_column(String, ForeignKey("menu.menu_id")
                                 , primary_key=True)
-    timestamp: Mapped[datetime] = mapped_column(DateTime)
+    timestamp: Mapped[str] = mapped_column(String)
     current_price: Mapped[float] = mapped_column(Float)
     previous_price: Mapped[float] = mapped_column(Float)
     price_change: Mapped[float] = mapped_column(Float)

@@ -1,4 +1,4 @@
-Restaurant_ID,Outdoor_seating,WiFi,Parking,Wheelchair_accessible,Pet_friendly,Kid_friendly,Vegetarian,Vegan,Halal,Alcohol,Drive_through,24_hours,Live_music
+Restaurant_ID,Outdoor_seating,WiFi,Parking,Wheelchair_accessible,Pet_friendly,Kid_friendly,Vegetarian,Vegan,Halal,Alcohol,Drive_through,all_day,Live_music
 RES000000,True,True,False,False,True,False,True,True,False,True,True,True,False
 RES000001,True,False,True,False,True,False,False,False,True,False,True,True,True
 RES000002,False,True,True,False,False,False,False,True,True,True,True,True,False
