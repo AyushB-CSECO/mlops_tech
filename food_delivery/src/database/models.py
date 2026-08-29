@@ -1,8 +1,7 @@
-from sqlalchemy import String, Integer, Float, Boolean, DateTime
+from sqlalchemy import String, Integer, Float, Boolean
 from sqlalchemy import PrimaryKeyConstraint
 from sqlalchemy import ForeignKey, ForeignKeyConstraint
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from datetime import datetime
+from sqlalchemy.orm import Mapped, mapped_column
 from pathlib import Path
 
 from database import Base
