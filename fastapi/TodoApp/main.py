@@ -4,12 +4,19 @@ from fastapi import FastAPI, Depends
 from fastapi import HTTPException, Path
 from starlette import status
 from models import Todos
+from pydantic import BaseModel, Field
 # from database import create_tables
 from database import SessionLocal
 
 app = FastAPI()
 
 # create_tables()
+
+class TodoRequest(BaseModel):
+    title: str = Field(min_length=3)
+    description: str = Field(min_length=3, max_length=100)
+    priority: int = Field(gt=0, lt=6)
+    complete: bool
 
 # Create Database object
 def get_db():
@@ -31,3 +38,35 @@ async def read_todo(db: Annotated[Session, Depends(get_db)]
         return todo_model
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND
                         , detail="Todo not found")
+
+@app.post("/todo", status_code=status.HTTP_201_CREATED)
+async def create_todo(db: Annotated[Session, Depends(get_db)],
+                      todorequest:TodoRequest):
+    todo_model = Todos(**todorequest.model_dump())
+    db.add(todo_model)
+    db.commit()
+
+@app.put("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def update_todo(db: Annotated[Session, Depends(get_db)], todo_id:int,
+                      todorequest: TodoRequest):
+    todo_model = db.query(Todos).filter(Todos.id==todo_id).first()
+    if todo_model is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail = "todo not found")
+
+    todo_model.title = todorequest.title
+    todo_model.description = todorequest.description
+    todo_model.priority = todorequest.priority
+    todo_model.complete = todorequest.complete
+
+    db.commit()
+
+@app.delete("/todo/{todo_id}", status_code = status.HTTP_204_NO_CONTENT)
+async def delete_todo(db: Annotated[Session, Depends(get_db)], 
+                      todo_id: int = Path(gt=0)):
+    todo_model = db.query(Todos).filter(Todos.id==todo_id).first()
+    if todo_model is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail = 'todo not found')
+    db.query(Todos).filter(Todos.id==todo_id).delete()
+    db.commit()    
