@@ -7,7 +7,7 @@ FILE_PATH = Path(__file__).resolve()
 BASE_PATH = FILE_PATH.parent
 os.chdir(BASE_PATH)
 
-SQLALCHEMY_DATABASE_URL = 'sqlite:///./todos.db'
+SQLALCHEMY_DATABASE_URL = 'sqlite:///./todosapp.db'
 
 class Base(DeclarativeBase):
     pass

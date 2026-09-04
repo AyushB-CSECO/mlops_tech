@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 
+from database import create_tables
 from routers import auth, todos
 
+create_tables()
 
 app = FastAPI()
 
